@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8" />
+<title>produit</title>
+<link  rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" 
+	th:href="@{css/bootstrap.min.css}" />
+<link  rel="stylesheet" type="text/css" href="../static/css/style.css" 
+	th:href="@{css/style.css}" />
+</head>
+<body>
+	<th:block layout:fragment="content">
+	
+		<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Saisie d'un employé</div>
+			<div class="panel-body ">
+				<form th:action="@{/save}" method="post" th:object="${emp}">
+					<div >
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Nom</label>
+                            <input type="text" name="nom" class="form-control" th:value="${emp.nom}"/>
+                            <span th:errors="${emp.nom}" class="red"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Prénom</label>
+                            <input type="text" name="prenom" class="form-control" th:value="${emp.prenom}"/>
+                            <span th:errors="${emp.prenom}" class="red"></span>
+                        </div>
+                    </div>
+					<div >
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Adresse</label>
+                            <input type="text" name="adresse" class="form-control" th:value="${emp.adresse}"/>
+                            <span th:errors="${emp.adresse}" class="red"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Email</label>
+                            <input type="text" name="email" class="form-control" th:value="${emp.email}"/>
+                            <span th:errors="${emp.prenom}" class="red"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Salaire</label>
+                            <input type="text" name="salaire" class="form-control" th:value="${{salaire}}"/>
+                            <span th:errors="${salaire}" class="red"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Durée en Année</label>
+                            <input type="text" name="duree" class="form-control" th:value="${{duree}}"/>
+                            <span th:errors="${duree}" class="red"></span>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label class="control-label">Date d'embauche</label>
+						<input type="date" name="hire_date" class="form-control" th:field="*{{hire_date}}"/>
+						<span th:errors="${emp.hire_date}" class="red"></span>
+					</div>
+					<div class="form-group">
+						<select multiple="multiple" name="competences" class="col-md-12">
+							<option value="">Choisissez les compétences de l'employée</option>
+							<option th:each="c : ${competences}"
+									th:value="${{c}}"
+									th:utext="${c.nom}"
+									th:selected="${emp.competences.contains(c)}"
+							/>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-success btn-md mt-3" style="margin-top:10px">Save</button>
+					
+				</form>
+			</div>
+		
+		</div>
+		
+	</div>
+	</th:block>
+	
+
+</body>
+</html>

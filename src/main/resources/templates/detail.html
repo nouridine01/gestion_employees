@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>produit</title>
+<link  rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" 
+	th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<th:block layout:fragment="content">
+	
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">Employé </div>
+				<div class="panel-body">
+                    <div class="form-group">
+                        <label>ID : </label><label th:text="${emp.id}"></label>
+                    </div>
+					<div class="form-group">
+						<label>Nom : </label><label th:text="${emp.nom}"></label>
+					</div>
+					<div class="form-group">
+						<label>Prénom : </label><label th:text="${emp.prenom}"></label>
+					</div>
+					<div class="form-group">
+						<label>Adresse : </label><label th:text="${emp.adresse}"></label>
+					</div>
+					<div class="form-group">
+						<label>Email : </label><label th:text="${emp.email}"></label>
+					</div>
+					<div class="form-group">
+						<label>Date Embauche : </label><label th:text="${emp.hire_date}"></label>
+					</div>
+					<div class="form-group">
+						<label>A Quitter : </label><label th:text="${emp.depart} ? | le ${emp.depart} | : 'Travail toujours'"></label>
+					</div>
+					<div class="form-group">
+						<table>
+							<tr>Compétences :</tr>
+							<tr th:each="c: ${emp.competences}">
+								<td th:text="${c.nom}" />
+							</tr>
+						</table>
+
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Periode</th><th>Salaire</th><th>Congée</th><th>Note</th><th>Periode Actuel</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p:${emp.periodes}">
+								<td th:text="| ${p.debut}  au ${p.fin} |"></td><td th:text="${p.salaire}"></td>
+								<td th:text="${p.conge.debut} ? | ${p.conge.debut}  au ${p.conge.fin} | : 'pas encore pris'"></td><td th:text="${p.note}"></td>
+								<td th:text="${p.actuel} ? 'OUI' : 'NON'"></td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

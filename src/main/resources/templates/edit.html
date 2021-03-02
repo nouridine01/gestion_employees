@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<meta charset="utf-8" />
+	<title>produit</title>
+	<link  rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+		   th:href="@{css/bootstrap.min.css}" />
+	<link  rel="stylesheet" type="text/css" href="../static/css/style.css"
+		   th:href="@{css/style.css}" />
+</head>
+<body>
+<th:block layout:fragment="content">
+
+	<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Modification d'un employé</div>
+			<div class="panel-body ">
+				<form th:action="@{/update}" method="post" th:object="${emp}">
+					<input type="hidden" name="id" class="form-control" th:value="${emp.id}"/>
+					<div >
+						<div class="form-group col-md-6">
+							<label class="control-label">Nom</label>
+							<input type="text" name="nom" class="form-control" th:value="${emp.nom}"/>
+							<span th:errors="${emp.nom}" class="red"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Prénom</label>
+							<input type="text" name="prenom" class="form-control" th:value="${emp.prenom}"/>
+							<span th:errors="${emp.prenom}" class="red"></span>
+						</div>
+					</div>
+					<div >
+						<div class="form-group col-md-6">
+							<label class="control-label">Adresse</label>
+							<input type="text" name="adresse" class="form-control" th:value="${emp.adresse}"/>
+							<span th:errors="${emp.adresse}" class="red"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Email</label>
+							<input type="text" name="email" class="form-control" th:value="${emp.email}"/>
+							<span th:errors="${emp.prenom}" class="red"></span>
+						</div>
+					</div>
+					<div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Salaire Actuel</label>
+							<input type="text" name="salaire" class="form-control" th:value="${p.salaire}"/>
+							<span th:errors="${p.salaire}" class="red"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Durée en Année</label>
+							<input type="text" name="duree" class="form-control" th:value="${duree}" disabled="disabled"/>
+							<span th:errors="${duree}" class="red"></span>
+						</div>
+					</div>
+					<div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Note</label>
+							<input type="text" name="note" class="form-control" th:value="${p.note}"/>
+							<span th:errors="${p.note}" class="red"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="control-label">Début Congé</label>
+							<input type="date" name="conge" class="form-control" th:value="${p.conge.debut}"/>
+							<span th:errors="${p.conge.debut}" class="red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<select multiple="multiple" name="competences" class="col-md-12">
+							<option th:each="c : ${competences}"
+									th:value="${{c}}"
+									th:utext="${c.nom}"
+									th:selected="${emp.competences.contains(c)}"
+							/>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-success btn-md mt-3" style="margin-top:10px">update</button>
+
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+</th:block>
+
+
+</body>
+</html>
